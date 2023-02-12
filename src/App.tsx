@@ -1,15 +1,16 @@
 import { useState } from 'react'
-import { Panel } from './components/Panel'
+import { Panel } from './components/HeadlessWizard/Panel'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { XRays } from './components/XRays'
 import { Select } from './components/Select'
+import { HeadlessWizard } from './components/HeadlessWizard/HeadlessWizard'
 
 export const App = () => {
   const [step, setStep] = useState(0)
   const [isTransparent, setIsTransparent] = useState(false)
-  const [cards, setCards] = useState(2) // 12
-  const [angle, setAngle] = useState(0) // 45
+  const [cards, setCards] = useState(6) // 12
+  const [angle, setAngle] = useState(30) // 45
 
   const elements = []
 
@@ -58,19 +59,13 @@ export const App = () => {
             </div>
           </div>
         </div>
-        {elements.map((element, index) => (
-          <Panel
-            key={index}
-            step={step}
-            index={index}
-            total={elements.length}
-            maxAngle={angle}
-          >
-            <Card index={index} isTransparent={isTransparent}>
+        <HeadlessWizard step={step} angle={angle}>
+          {elements.map((element, index) => (
+            <Card key={index} index={index} isTransparent={isTransparent}>
               <Button onClick={() => setStep(element)}>NEXT</Button>
             </Card>
-          </Panel>
-        ))}
+          ))}
+        </HeadlessWizard>
       </div>
     </div>
   )
