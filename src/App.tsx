@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Panel } from './components/HeadlessWizard/Panel'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { XRays } from './components/XRays'
@@ -8,9 +7,9 @@ import { HeadlessWizard } from './components/HeadlessWizard/HeadlessWizard'
 
 export const App = () => {
   const [step, setStep] = useState(0)
+  const [cards, setCards] = useState(6)
+  const [angle, setAngle] = useState(-30)
   const [isTransparent, setIsTransparent] = useState(false)
-  const [cards, setCards] = useState(6) // 12
-  const [angle, setAngle] = useState(30) // 45
 
   const elements = []
 
@@ -40,7 +39,7 @@ export const App = () => {
             type="range"
             name="angle"
             id="angle"
-            min={0}
+            min={-45}
             max={45}
             className="w-96"
             value={angle}
