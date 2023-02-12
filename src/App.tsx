@@ -1,41 +1,74 @@
 import { useState } from 'react'
-import classNames from 'classnames'
 import { Panel } from './components/Panel'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
+import { XRays } from './components/XRays'
+import { Select } from './components/Select'
 
 export const App = () => {
   const [step, setStep] = useState(0)
+  const [isTransparent, setIsTransparent] = useState(false)
+  const [cards, setCards] = useState(2) // 12
+  const [angle, setAngle] = useState(0) // 45
+
+  const elements = []
 
   // Index need to start in 1 and the initial order backward.
 
-  const cards = [
-    <Card className="bg-slate-200">
-      <Button onClick={() => setStep(5)}>NEXT</Button>
-    </Card>,
-    <Card className="bg-indigo-200">
-      <Button onClick={() => setStep(4)}>NEXT</Button>
-    </Card>,
-    <Card className="bg-cyan-200">
-      <Button onClick={() => setStep(3)}>NEXT</Button>
-    </Card>,
-    <Card className="bg-orange-200">
-      <Button onClick={() => setStep(2)}>NEXT</Button>
-    </Card>,
-    <Card className="bg-green-200">
-      <Button onClick={() => setStep(1)}>NEXT</Button>
-    </Card>,
-  ]
+  for (let i = cards; i > 0; i--) {
+    elements.push(i)
+  }
 
   return (
     <div className="w-screen h-screen flex items-center justify-center p-48">
+      <div className="absolute top-0 left-0 ml-10 p-10 flex items-center gap-8">
+        <XRays
+          label="X Rays"
+          disclaimer="Show how it works"
+          checked={isTransparent}
+          onChange={(checked) => setIsTransparent(checked)}
+        />
+        <Select
+          options={[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+          value={cards}
+          onChange={(event) => setCards(Number(event.target.value))}
+        />
+        <label htmlFor="angle" className="flex justify-center">
+          <div className="w-24">Angle ({angle}º)</div>
+          <input
+            type="range"
+            name="angle"
+            id="angle"
+            min={0}
+            max={45}
+            className="w-96"
+            value={angle}
+            onChange={(event) => setAngle(Number(event.target.value))}
+          />
+        </label>
+      </div>
       <div className="relative w-full h-full">
         <div className="absolute w-full h-full flex items-center justify-center">
-          <Button onClick={() => setStep(0)}>RESET</Button>
+          <div className="grid justify-items-center gap-y-4 pt-4 select-none">
+            <span className="text-xl text-slate-700">
+              Congrats! You are done 🙂
+            </span>
+            <div>
+              <Button onClick={() => setStep(0)}>RESET</Button>
+            </div>
+          </div>
         </div>
-        {cards.map((card, index) => (
-          <Panel step={step} index={index} total={cards.length}>
-            {card}
+        {elements.map((element, index) => (
+          <Panel
+            key={index}
+            step={step}
+            index={index}
+            total={elements.length}
+            maxAngle={angle}
+          >
+            <Card index={index} isTransparent={isTransparent}>
+              <Button onClick={() => setStep(element)}>NEXT</Button>
+            </Card>
           </Panel>
         ))}
       </div>

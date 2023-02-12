@@ -1,20 +1,22 @@
 import classNames from 'classnames'
 import { ReactNode } from 'react'
+import { BORDER_COLOR } from '../constants/borderColor'
+import { BACKGROUND_COLOR } from '../constants/backgroundColor'
 
 type CardType = {
-  className?: string
+  index: number
+  isTransparent?: boolean
   children: ReactNode
 }
 
-export const Card = ({ className, children }: CardType) => {
-  return (
-    <div
-      className={classNames(
-        'w-full h-full rounded-lg flex items-center justify-center',
-        className
-      )}
-    >
-      {children}
-    </div>
-  )
-}
+export const Card = ({ index, isTransparent, children }: CardType) => (
+  <div
+    className={classNames(
+      `w-full h-full rounded-lg flex items-center justify-center border-4 ${
+        BORDER_COLOR[index]
+      } ${isTransparent ? 'bg-transparent' : BACKGROUND_COLOR[index]}`
+    )}
+  >
+    {children}
+  </div>
+)

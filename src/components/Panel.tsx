@@ -1,24 +1,24 @@
 import classNames from 'classnames'
 import { ReactNode } from 'react'
 
-const MAX_ANGLE = 30
-
 type CardProps = {
   step: number
   index: number
   total: number
+  maxAngle: number
   children: ReactNode
 }
 
-export const Panel = ({ step, index, total, children }: CardProps) => {
+export const Panel = ({
+  step,
+  index,
+  total,
+  maxAngle,
+  children,
+}: CardProps) => {
   const realIndex = total - 1 - index
-  const middle = Math.ceil(total / 2) + 1
-
-  const middleCard = middle % 2 !== 0 && realIndex === middle
-  const sign = middleCard ? 0 : realIndex < middle ? 1 : -1
-
-  console.log('REAL INDEX:', realIndex)
-  console.log('SIGN:', sign)
+  const horizontalCorrection = maxAngle / 2
+  const angle = (maxAngle / (total - 1)) * realIndex - horizontalCorrection
 
   return (
     <div
@@ -26,16 +26,16 @@ export const Panel = ({ step, index, total, children }: CardProps) => {
         'absolute w-full h-full transition-all duration-500',
         {
           'scale-50': step < realIndex,
-          '-translate-x-full': step > realIndex,
         }
       )}
       {...(step > realIndex && {
         style: {
           transform:
             step > realIndex
-              ? `translate(-105%, ${sign * (realIndex + 1) * 10}px) rotateZ(${
-                  sign * (realIndex + 1) * 5
-                }deg)`
+              ? `
+                  translateX(-105%)
+                  rotateZ(${angle}deg)
+                `
               : '',
           zIndex: realIndex + 1,
         },
