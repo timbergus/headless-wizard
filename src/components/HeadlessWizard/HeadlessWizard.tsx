@@ -1,24 +1,28 @@
-import { ReactElement } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { Panel } from './Panel'
+import { Button } from '../Button'
 
 type HeadlessWizardProps = {
   step: number
   angle?: number
+  closing?: ReactNode
   children: ReactElement[]
 }
 
 export const HeadlessWizard = ({
   step,
   angle = 0,
+  closing,
   children,
 }: HeadlessWizardProps) => (
-  <div>
-    {children.map((card, index) => (
+  <div className="relative w-full h-full">
+    {closing ? <div className="absolute w-full h-full">{closing}</div> : null}
+    {children.map((card) => (
       <Panel
-        key={index}
+        key={card.props.index}
         step={step}
-        index={index}
-        total={children.length ?? 0}
+        index={card.props.index}
+        total={children.length}
         maxAngle={angle}
       >
         {card}

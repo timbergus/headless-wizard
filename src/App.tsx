@@ -4,6 +4,7 @@ import { Card } from './components/Card'
 import { XRays } from './components/XRays'
 import { Select } from './components/Select'
 import { HeadlessWizard } from './components/HeadlessWizard/HeadlessWizard'
+import { ClosingCard } from './components/ClosingCard'
 
 export const App = () => {
   const [step, setStep] = useState(0)
@@ -15,9 +16,7 @@ export const App = () => {
 
   // Index need to start in 1 and the initial order backward.
 
-  for (let i = cards; i > 0; i--) {
-    elements.push(i)
-  }
+  for (let i = cards - 1; i >= 0; i--) elements.push(i)
 
   return (
     <div className="w-screen h-screen flex items-center justify-center p-48">
@@ -47,25 +46,20 @@ export const App = () => {
           />
         </label>
       </div>
-      <div className="relative w-full h-full">
-        <div className="absolute w-full h-full flex items-center justify-center">
-          <div className="grid justify-items-center gap-y-4 pt-4 select-none">
-            <span className="text-xl text-slate-700">
-              Congrats! You are done 🙂
-            </span>
-            <div>
-              <Button onClick={() => setStep(0)}>RESET</Button>
+      <HeadlessWizard
+        step={step}
+        angle={angle}
+        closing={<ClosingCard onClick={() => setStep(0)} />}
+      >
+        {elements.map((index) => (
+          <Card key={index} index={index} isTransparent={isTransparent}>
+            <div className="grid gap-y-8 place-items-center text-slate-700">
+              <span className="text-3xl">{index + 1}</span>
+              <Button onClick={() => setStep(index + 1)}>NEXT</Button>
             </div>
-          </div>
-        </div>
-        <HeadlessWizard step={step} angle={angle}>
-          {elements.map((element, index) => (
-            <Card key={index} index={index} isTransparent={isTransparent}>
-              <Button onClick={() => setStep(element)}>NEXT</Button>
-            </Card>
-          ))}
-        </HeadlessWizard>
-      </div>
+          </Card>
+        ))}
+      </HeadlessWizard>
     </div>
   )
 }

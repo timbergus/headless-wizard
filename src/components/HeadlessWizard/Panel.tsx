@@ -16,28 +16,20 @@ export const Panel = ({
   maxAngle,
   children,
 }: CardProps) => {
-  const realIndex = total - 1 - index
   const horizontalCorrection = maxAngle / 2
-  const angle = (maxAngle / (total - 1)) * realIndex - horizontalCorrection
-
+  const angle = (maxAngle / (total - 1)) * index - horizontalCorrection
   return (
     <div
       className={classNames(
         'absolute w-full h-full transition-all duration-500',
         {
-          'scale-50': step < realIndex,
+          'scale-50': index > step,
         }
       )}
-      {...(step > realIndex && {
+      {...(index < step && {
         style: {
-          transform:
-            step > realIndex
-              ? `
-                  translateX(-105%)
-                  rotateZ(${angle}deg)
-                `
-              : '',
-          zIndex: realIndex + 1,
+          transform: `translateX(-105%) rotateZ(${angle}deg)`,
+          zIndex: index,
         },
       })}
     >
