@@ -1,3 +1,3 @@
 # Colorful Wizard
 
-An experiment ot create a wizard with mobile cards.
+An experiment to create a wizard with mobile cards.
