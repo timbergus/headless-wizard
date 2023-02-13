@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import { Switch } from '@headlessui/react'
-import { ComponentProps } from 'react'
 
 type XRaysProps = {
   checked?: boolean

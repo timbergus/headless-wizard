@@ -1,6 +1,7 @@
 import { ReactElement, ReactNode } from 'react'
 import { Panel } from './Panel'
-import { Button } from '../Button'
+
+import './headlessWizard.css'
 
 type HeadlessWizardProps = {
   step: number
@@ -15,8 +16,8 @@ export const HeadlessWizard = ({
   closing,
   children,
 }: HeadlessWizardProps) => (
-  <div className="relative w-full h-full">
-    {closing ? <div className="absolute w-full h-full">{closing}</div> : null}
+  <div className="headless-wizard">
+    {closing ? <div className="closing">{closing}</div> : null}
     {children.map((card) => (
       <Panel
         key={card.props.index}

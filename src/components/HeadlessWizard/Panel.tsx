@@ -1,6 +1,8 @@
 import classNames from 'classnames'
 import { ReactNode } from 'react'
 
+import './panel.css'
+
 type CardProps = {
   step: number
   index: number
@@ -20,12 +22,9 @@ export const Panel = ({
   const angle = (maxAngle / (total - 1)) * index - horizontalCorrection
   return (
     <div
-      className={classNames(
-        'absolute w-full h-full transition-all duration-500',
-        {
-          'scale-50': index > step,
-        }
-      )}
+      className={classNames('panel', {
+        'panel--small': index > step,
+      })}
       {...(index < step && {
         style: {
           transform: `translateX(-105%) rotateZ(${angle}deg)`,
