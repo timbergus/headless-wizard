@@ -2,6 +2,7 @@
   "name": "headless-wizard",
   "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
   "main": "src/components/HeadlessWizard/HeadlessWizard.tsx",
   "scripts": {
     "dev": "vite",

@@ -3,7 +3,7 @@ import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { XRays } from './components/XRays'
 import { Select } from './components/Select'
-import { HeadlessWizard } from './components/HeadlessWizard/HeadlessWizard'
+import { HeadlessWizard } from './lib'
 import { ClosingCard } from './components/ClosingCard'
 
 export const App = () => {
