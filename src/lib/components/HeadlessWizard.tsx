@@ -1,13 +1,22 @@
-import { ReactElement, ReactNode } from 'react'
 import { Panel } from './Panel'
 
-import './headlessWizard.css'
+const headlessWizardStyle: React.CSSProperties = {
+  position: 'relative',
+  width: '100%',
+  height: '100%',
+}
+
+const closingStyle: React.CSSProperties = {
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+}
 
 type HeadlessWizardProps = {
   step: number
   angle?: number
-  closing?: ReactNode
-  children: ReactElement[]
+  closing?: React.ReactNode
+  children: React.ReactElement[]
 }
 
 export const HeadlessWizard = ({
@@ -16,8 +25,8 @@ export const HeadlessWizard = ({
   closing,
   children,
 }: HeadlessWizardProps) => (
-  <div className="headless-wizard">
-    {closing ? <div className="closing">{closing}</div> : null}
+  <div style={headlessWizardStyle}>
+    {closing ? <div style={closingStyle}>{closing}</div> : null}
     {children.map((card) => (
       <Panel
         key={card.props.index}
