@@ -27,8 +27,12 @@ export const XRays = ({ label, disclaimer, checked, onChange }: XRaysProps) => (
       />
     </Switch>
     <Switch.Label as="span" className="ml-3 flex items-center gap-2">
-      <span className="text-sm font-medium text-gray-900">{label}</span>
-      <span className="text-sm text-gray-500">({disclaimer})</span>
+      <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
+        {label}
+      </span>
+      <span className="text-sm text-slate-500 dark:text-slate-400">
+        ({disclaimer})
+      </span>
     </Switch.Label>
   </Switch.Group>
 )

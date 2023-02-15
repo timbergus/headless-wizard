@@ -1,39 +1,42 @@
-import { Panel } from './Panel'
+import { Panel, PositionType, expandedStyle } from './Panel'
 
 const headlessWizardStyle: React.CSSProperties = {
   position: 'relative',
-  width: '100%',
-  height: '100%',
+  ...expandedStyle,
 }
 
-const closingStyle: React.CSSProperties = {
+const closingComponentStyle: React.CSSProperties = {
   position: 'absolute',
-  width: '100%',
-  height: '100%',
+  ...expandedStyle,
 }
 
 type HeadlessWizardProps = {
   step: number
   angle?: number
-  closing?: React.ReactNode
+  position?: PositionType
+  closingComponent?: React.ReactNode
   children: React.ReactElement[]
 }
 
 export const HeadlessWizard = ({
   step,
   angle = 0,
-  closing,
+  position = 'left',
+  closingComponent,
   children,
 }: HeadlessWizardProps) => (
   <div style={headlessWizardStyle}>
-    {closing ? <div style={closingStyle}>{closing}</div> : null}
+    {closingComponent ? (
+      <div style={closingComponentStyle}>{closingComponent}</div>
+    ) : null}
     {children.map((card) => (
       <Panel
         key={card.props.index}
         step={step}
         index={card.props.index}
         total={children.length}
-        maxAngle={angle}
+        angle={angle}
+        position={position}
       >
         {card}
       </Panel>

@@ -1,8 +1,8 @@
 import { ChangeEvent } from 'react'
 
 type SelectProps = {
-  options: number[]
-  value: number
+  options: (number | string)[]
+  value: number | string
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -10,7 +10,7 @@ export const Select = ({ options, value, onChange }: SelectProps) => (
   <div className="flex gap-2 items-center">
     <label
       htmlFor="location"
-      className="block text-sm font-medium text-gray-700"
+      className="block text-sm font-medium text-slate-800 dark:text-slate-200"
     >
       Cards
     </label>
