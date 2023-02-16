@@ -1,12 +1,12 @@
 import { ChangeEvent } from 'react'
 
-type SelectProps = {
+type CardsProps = {
   options: (number | string)[]
   value: number | string
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-export const Select = ({ options, value, onChange }: SelectProps) => (
+export const Cards = ({ options, value, onChange }: CardsProps) => (
   <div className="flex gap-2 items-center">
     <label
       htmlFor="location"

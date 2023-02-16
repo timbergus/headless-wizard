@@ -2,17 +2,24 @@ import { useState } from 'react'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
 import { XRays } from './components/XRays'
-import { Select } from './components/Select'
+import { Cards } from './components/Cards'
 import { HeadlessWizard } from './lib'
 import { ClosingCard } from './components/ClosingCard'
 import { Angle } from './components/Angle'
 import { PositionType } from './lib/components/Panel'
+import { XDisplacement } from './components/XDisplacement'
+import { YDisplacement } from './components/YDisplacement'
+import { Tooltip } from 'react-tooltip'
+import { VscInfo } from 'react-icons/vsc'
+import { Position } from './components/Position'
 
 export const App = () => {
   const [step, setStep] = useState(0)
   const [cards, setCards] = useState(6)
   const [angle, setAngle] = useState(-30)
   const [position, setPosition] = useState<PositionType>('left')
+  const [xDisplacement, setXDisplacement] = useState(105)
+  const [yDisplacement, setYDisplacement] = useState(120)
   const [isTransparent, setIsTransparent] = useState(false)
 
   const elements = []
@@ -22,8 +29,12 @@ export const App = () => {
   for (let i = cards - 1; i >= 0; i--) elements.push(i)
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center p-48 bg-slate-200 dark:bg-slate-800">
-      <div className="absolute top-0 left-0 w-full h-20 z-50 bg-slate-200 dark:bg-slate-800">
+    <div className="w-screen h-screen flex items-center justify-center p-48 bg-slate-200 dark:bg-slate-800 overflow-hidden">
+      <div
+        className={`flex absolute ${
+          position === 'top' ? 'bottom-0 flex-col-reverse' : 'top-0 flex-col'
+        } left-0 w-full h-20 z-50 bg-slate-200 dark:bg-slate-800`}
+      >
         <div className="flex items-center px-10 gap-8 h-full">
           <XRays
             label="X Rays"
@@ -31,19 +42,40 @@ export const App = () => {
             checked={isTransparent}
             onChange={(checked) => setIsTransparent(checked)}
           />
-          <Select
-            options={[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
-            value={cards}
-            onChange={(event) => setCards(Number(event.target.value))}
-          />
-          <Angle angle={angle} setAngle={setAngle} />
-          <Select
+          <Position
             options={['top', 'right', 'bottom', 'left']}
             value={position}
             onChange={(event) =>
               setPosition(event.target.value as PositionType)
             }
           />
+          <Cards
+            options={[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]}
+            value={cards}
+            onChange={(event) => setCards(Number(event.target.value))}
+          />
+          <Angle angle={angle} setAngle={setAngle} />
+          {['top', 'bottom'].includes(position) ? (
+            <YDisplacement
+              yDisplacement={yDisplacement}
+              setYDisplacement={setYDisplacement}
+            />
+          ) : (
+            <XDisplacement
+              xDisplacement={xDisplacement}
+              setXDisplacement={setXDisplacement}
+            />
+          )}
+          <VscInfo
+            id="summary"
+            className="text-slate-800 dark:text-slate-200 w-8 h-8"
+          />
+          <Tooltip anchorId="summary" place="bottom" className="summary">
+            <div>Angle: {angle}º</div>
+            <div>Position: {position}</div>
+            <div>X Displacement: {xDisplacement}px</div>
+            <div>Y Displacement: {yDisplacement}px</div>
+          </Tooltip>
         </div>
         <div className="w-full border-b border-b-slate-400" />
       </div>
@@ -51,6 +83,8 @@ export const App = () => {
         step={step}
         angle={angle}
         position={position}
+        xDisplacement={xDisplacement}
+        yDisplacement={yDisplacement}
         closingComponent={<ClosingCard onClick={() => setStep(0)} />}
       >
         {elements.map((index) => (

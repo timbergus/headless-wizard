@@ -14,6 +14,8 @@ type HeadlessWizardProps = {
   step: number
   angle?: number
   position?: PositionType
+  xDisplacement?: number
+  yDisplacement?: number
   closingComponent?: React.ReactNode
   children: React.ReactElement[]
 }
@@ -22,6 +24,8 @@ export const HeadlessWizard = ({
   step,
   angle = 0,
   position = 'left',
+  xDisplacement = 105,
+  yDisplacement = 120,
   closingComponent,
   children,
 }: HeadlessWizardProps) => (
@@ -37,6 +41,8 @@ export const HeadlessWizard = ({
         total={children.length}
         angle={angle}
         position={position}
+        xDisplacement={xDisplacement}
+        yDisplacement={yDisplacement}
       >
         {card}
       </Panel>
