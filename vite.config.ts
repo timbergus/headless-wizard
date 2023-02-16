@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
 
 const config = {
   docs: {
@@ -22,6 +22,9 @@ const currentConfig = config[process.env.BUILD ?? '']
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/headless-wizard/',
+  server: {
+    port: 5432,
+  },
   build: {
     ...currentConfig,
   },

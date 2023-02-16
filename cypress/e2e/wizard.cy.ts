@@ -1,6 +1,6 @@
 describe('template spec', () => {
   it('passes', () => {
-    cy.visit('http://localhost:5173/headless-wizard/')
+    cy.visit('http://localhost:5432/headless-wizard/')
 
     cy.findByTestId('card-button-0').findByRole('button').click()
     cy.findByTestId('card-button-1').findByRole('button').click()
