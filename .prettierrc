@@ -1,4 +1,13 @@
 {
   "semi": false,
-  "singleQuote": true
+  "singleQuote": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^./lib/?(.*)$",
+    "^./components/(.*)$",
+    ".css$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

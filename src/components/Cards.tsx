@@ -7,7 +7,7 @@ type CardsProps = {
 }
 
 export const Cards = ({ options, value, onChange }: CardsProps) => (
-  <div className="flex gap-4 items-center">
+  <div className="flex items-center gap-4">
     <label htmlFor="location" className="text-slate-800 dark:text-slate-200">
       Cards
     </label>

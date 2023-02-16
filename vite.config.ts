@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -16,7 +17,7 @@ const config = {
   },
 }
 
-const currentConfig = config[process.env.BUILD]
+const currentConfig = config[process.env.BUILD ?? '']
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,4 +26,16 @@ export default defineConfig({
     ...currentConfig,
   },
   plugins: [react()],
+  test: {
+    coverage: {
+      include: ['src/**/*.ts'],
+      exclude: [
+        'src/types',
+        'src/**/*.d.ts',
+        'src/**/*.atom.ts',
+        'src/**/*.test.ts',
+      ],
+      all: true,
+    },
+  },
 })

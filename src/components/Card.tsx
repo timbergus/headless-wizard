@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { ReactNode } from 'react'
-import { BORDER_COLOR } from '../constants/borderColor'
+
 import { BACKGROUND_COLOR } from '../constants/backgroundColor'
+import { BORDER_COLOR } from '../constants/borderColor'
 
 type CardType = {
   index: number

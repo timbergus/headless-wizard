@@ -1,17 +1,19 @@
 import { useState } from 'react'
+import { VscInfo } from 'react-icons/vsc'
+import { Tooltip } from 'react-tooltip'
+
+import { HeadlessWizard } from './lib'
+import { PositionType } from './lib/components/Panel'
+
+import { Angle } from './components/Angle'
 import { Button } from './components/Button'
 import { Card } from './components/Card'
-import { XRays } from './components/XRays'
 import { Cards } from './components/Cards'
-import { HeadlessWizard } from './lib'
 import { ClosingCard } from './components/ClosingCard'
-import { Angle } from './components/Angle'
-import { PositionType } from './lib/components/Panel'
-import { XDisplacement } from './components/XDisplacement'
-import { YDisplacement } from './components/YDisplacement'
-import { Tooltip } from 'react-tooltip'
-import { VscInfo } from 'react-icons/vsc'
 import { Position } from './components/Position'
+import { XDisplacement } from './components/XDisplacement'
+import { XRays } from './components/XRays'
+import { YDisplacement } from './components/YDisplacement'
 
 export const App = () => {
   const [step, setStep] = useState(0)
@@ -29,13 +31,13 @@ export const App = () => {
   for (let i = cards - 1; i >= 0; i--) elements.push(i)
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center p-48 bg-slate-200 dark:bg-slate-800 overflow-hidden">
+    <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-slate-200 p-48 dark:bg-slate-800">
       <div
-        className={`flex absolute ${
+        className={`absolute flex ${
           position === 'top' ? 'bottom-0 flex-col-reverse' : 'top-0 flex-col'
-        } left-0 w-full h-20 z-50 bg-slate-200 dark:bg-slate-800`}
+        } left-0 z-50 h-20 w-full bg-slate-200 dark:bg-slate-800`}
       >
-        <div className="flex items-center px-10 gap-8 h-full">
+        <div className="flex h-full items-center gap-8 px-10">
           <XRays
             label="X Rays"
             disclaimer="Show how it works"
@@ -68,7 +70,7 @@ export const App = () => {
           )}
           <VscInfo
             id="summary"
-            className="text-slate-800 dark:text-slate-200 w-8 h-8"
+            className="h-8 w-8 text-slate-800 dark:text-slate-200"
           />
           <Tooltip anchorId="summary" place="bottom" className="summary">
             <div>Angle: {angle}º</div>
@@ -89,7 +91,10 @@ export const App = () => {
       >
         {elements.map((index) => (
           <Card key={index} index={index} isTransparent={isTransparent}>
-            <div className="grid gap-y-8 place-items-center">
+            <div
+              data-testid={`card-button-${index}`}
+              className="grid place-items-center gap-y-8"
+            >
               <span
                 className={`text-3xl ${
                   isTransparent ? 'text-slate-200' : 'text-slate-800'

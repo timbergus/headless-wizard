@@ -1,8 +1,8 @@
-import React, { Dispatch } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 type XDisplacementProps = {
   xDisplacement: number
-  setXDisplacement: Dispatch<React.SetStateAction<number>>
+  setXDisplacement: Dispatch<SetStateAction<number>>
 }
 
 export const XDisplacement = ({

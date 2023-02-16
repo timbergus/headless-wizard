@@ -7,7 +7,7 @@ type PositionProps = {
 }
 
 export const Position = ({ options, value, onChange }: PositionProps) => (
-  <div className="flex gap-4 items-center">
+  <div className="flex items-center gap-4">
     <label htmlFor="location" className="text-slate-800 dark:text-slate-200">
       Position
     </label>
