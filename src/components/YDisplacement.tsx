@@ -9,8 +9,8 @@ export const YDisplacement = ({
   yDisplacement,
   setYDisplacement,
 }: YDisplacementProps) => (
-  <label htmlFor="yDisplacement" className="flex justify-center gap-4">
-    <span className="dark:text-slate-200">Y Displacement</span>
+  <label htmlFor="yDisplacement" className="flex items-center gap-4">
+    <span className="text-slate-800 dark:text-slate-200">Y Displacement</span>
     <input
       type="range"
       name="yDisplacement"

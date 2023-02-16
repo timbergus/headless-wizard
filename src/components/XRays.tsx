@@ -9,7 +9,7 @@ type XRaysProps = {
 }
 
 export const XRays = ({ label, disclaimer, checked, onChange }: XRaysProps) => (
-  <Switch.Group as="div" className="flex items-center">
+  <Switch.Group as="div" className="flex items-center gap-4">
     <Switch
       checked={checked}
       onChange={onChange}
@@ -26,10 +26,8 @@ export const XRays = ({ label, disclaimer, checked, onChange }: XRaysProps) => (
         )}
       />
     </Switch>
-    <Switch.Label as="span" className="ml-3 flex items-center gap-2">
-      <span className="text-sm font-medium text-slate-800 dark:text-slate-200">
-        {label}
-      </span>
+    <Switch.Label as="span" className="flex items-center gap-2">
+      <span className="text-slate-800 dark:text-slate-200">{label}</span>
       <span className="text-sm text-slate-500 dark:text-slate-400">
         ({disclaimer})
       </span>

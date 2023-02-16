@@ -9,8 +9,8 @@ export const XDisplacement = ({
   xDisplacement,
   setXDisplacement,
 }: XDisplacementProps) => (
-  <label htmlFor="xDisplacement" className="flex justify-center gap-4">
-    <span className="dark:text-slate-200">X Displacement</span>
+  <label htmlFor="xDisplacement" className="flex items-center gap-4">
+    <span className="text-slate-800 dark:text-slate-200">X Displacement</span>
     <input
       type="range"
       name="xDisplacement"
