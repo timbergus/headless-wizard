@@ -73,8 +73,8 @@ export const App = () => {
           <Tooltip anchorId="summary" place="bottom" className="summary">
             <div>Angle: {angle}º</div>
             <div>Position: {position}</div>
-            <div>X Displacement: {xDisplacement}px</div>
-            <div>Y Displacement: {yDisplacement}px</div>
+            <div>X Displacement: {xDisplacement}%</div>
+            <div>Y Displacement: {yDisplacement}%</div>
           </Tooltip>
         </div>
         <div className="w-full border-b border-b-slate-400" />
